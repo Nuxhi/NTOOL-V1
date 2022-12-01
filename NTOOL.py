@@ -4,35 +4,45 @@ import time
 import glob
 import shutil
 import getpass
+
 username = getpass.getuser()
 #source : https://stackoverflow.com/questions/842059/is-there-a-portable-way-to-get-the-current-username-in-python
 
 import requests
 from requests_html import HTMLSession
 
+## Liste d'erreur ##
+##
+## N404 : le dossier n'est pas trouver
+
 version = 'NTool-V01'
+os.system('mode con: cols=80 lines=20')
 def main_menu():
 
     os.system('cls')
-    print("\n                     Bienvenu")
-    print("\n               ╔══════════════════════════════╗")
-    print("               ║                              ║")
-    print("               ║     1.  Vider le cache       ║")
-    print("               ║                              ║")
-    print("               ║     2. Ouvrir les dossiers   ║")
-    print("               ║                              ║")
-    print("               ║     3. Gestion des mods      ║")
-    print("               ║                              ║")
-    print("               ║     4. Mise a jour du tool   ║")
-    print("               ║                              ║")
-    print("               ╚══════════════════════════════╝\n")
+    print("\n                                 Bienvenu")
+    print("\n                       ╔══════════════════════════════╗")
+    print("                       ║                              ║")
+    print("                       ║     1.  Vider le cache       ║")
+    print("                       ║                              ║")
+    print("                       ║     2. Ouvrir les dossiers   ║")
+    print("                       ║                              ║")
+    print("                       ║     3. Gestion des mods      ║")
+    print("                       ║                              ║")
+    print("                       ║     4. Mise a jour du tool   ║")
+    print("                       ║                              ║")
+    print("                       ╚══════════════════════════════╝\n")
 
     choix = input(" [CONSOLE]   :  ")
     if choix == '1':
         cache_menu()
 
     if choix == '2':
-        os.startfile("C:/Users/"+ username + "/AppData/Local/FiveM")
+        try:
+            os.startfile("C:/Users/"+ username + "/AppData/Local/FiveM")
+        except: 
+            print("[Erreur N404] - FiveM n'est pas trouver")
+            time.sleep(2), main_menu() 
 
     if choix == '4':
         tool_update() 
@@ -73,7 +83,11 @@ def cache_lvl1():
 # cache_lvl1 est le premier niveau de suppression du cache de FiveM, certe celui-ci est le premier mais il reste le meillieur.
 # en effet, une suppréssion calculer (plus lente) de fichier / dossier visé, on pointe notre supprésion sur ce qui joue vraiment dans le cache de FiveM
 
-    os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app")
+    try:
+        os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app")
+    except:
+        print("[Erreur N404] - FiveM n'est pas trouver")
+        time.sleep(2), main_menu() 
 
     try:
         os.remove("adhesive.dll")
@@ -109,9 +123,11 @@ def cache_lvl2():
 # Des bugs en jeu peuvent etre subie.
 
     ## fichier !
-
-    os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app")
-
+    try:
+        os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app")
+    except:
+        print("[Erreur N404] - FiveM n'est pas trouver")
+        time.sleep(2), main_menu() 
 
     try:
         os.remove("adhesive.dll")
@@ -220,8 +236,12 @@ def cache_lvl2():
 
 def citizen_zero():
     
-    os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app") # On se met dans le dossier voulue
-    
+    try:
+        os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app")
+    except:
+        print("[Erreur N404] - FiveM n'est pas trouver")
+        time.sleep(2), main_menu() 
+
     shutil.rmtree("citizen", ignore_errors=True)
     if os.path.exists("citizen"):
         print("[FOLDER] - citizen ")
@@ -241,6 +261,7 @@ def tool_update():
         print()
     else:
         print('[Console] : Serveur indisponible : ', r,'\nDirigez-vous sur notre discord !')
+        time.sleep(2), main_menu()
 
     try:
         title = r.html.find('.p-org')[0].text
