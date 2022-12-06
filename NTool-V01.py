@@ -74,7 +74,6 @@ def tool_update():
         time.sleep(5)
         os.startfile(last_version) # On lance la nouvelle version afin que le processus de suppression sois executer.     
         print('start', last_version)
-        time.sleep(5)
         exit
 
     else:
