@@ -22,8 +22,6 @@ os.system('mode con: cols=80 lines=20')
 
 def tool_update():
     
-
-
     ## Execution probable sur la version suivante.
     ## A chaque démarage on supprime l'ancienne version.
     ## Lors de la mise a jour, vue que le lancement de la nouvelle version est automatique alors celle-ci supprime la précedente.
@@ -37,17 +35,16 @@ def tool_update():
         print('none')
 
     # get last version // instalation 
-
     print('Please wait, checking for updates. 2/2')
 
     s = HTMLSession()
     link = "https://github.com/Nuxhi" # on regarde.
-    link_update = "https://github.com/Nuxhi/NTool/blob/main/README.md" # Si une version est disponible, alors on la télécharge grace à "link_update"
+    link_update = "https://github.com/Nuxhi/NTool/raw/main/NTool-V02.exe" # Si une version est disponible, alors on la télécharge grace à "link_update"
+    #https://github.com/Nuxhi/NTool/blob/main/README.md 
     rqt = s.get(link)
     
 
     #Vérification de la disponibilité des serveurs.
-
     if rqt.ok:
         print('Connection to the update server')
     else:
@@ -65,12 +62,11 @@ def tool_update():
         print('update disponible !\nVersion : ',title,'disponible,\nTéléchargement en cours...')
         r_upt = s.get(link_update, allow_redirects=True)
         open('README.md', 'wb').write(r_upt.content)
-        
-
 
         time.sleep(5)
-        os.startfile(last_version) # On lance la nouvelle version afin que le processus de suppression sois executer.
+        os.startfile(last_version) # On lance la nouvelle version afin que le processus de suppression sois executer.     
         print('start', last_version)
+        exit
 
     else:
         print('Aucune update disponible !')
