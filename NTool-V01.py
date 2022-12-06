@@ -47,7 +47,7 @@ def tool_update():
 
     s = HTMLSession()
     link = "https://github.com/Nuxhi" # on regarde.
-    link_update = "https://github.com/Nuxhi/NTool/raw/main/NTool-V02.exe" # Si une version est disponible, alors on la télécharge grace à "link_update"
+    link_update = "https://github.com/Nuxhi/NTool/raw/main/"+last_version # Si une version est disponible, alors on la télécharge grace à "link_update"
     #https://github.com/Nuxhi/NTool/blob/main/README.md 
     rqt = s.get(link)
     
@@ -69,9 +69,10 @@ def tool_update():
     if title != version:
         print('update disponible !\nVersion : ',title,'disponible,\nTéléchargement en cours...')
         r_upt = s.get(link_update, allow_redirects=True)
-        open('README.md', 'wb').write(r_upt.content)
+        print(link_update) #Debug : vérification
+        open(last_version, 'wb').write(r_upt.content)
 
-        time.sleep(5)
+        time.sleep(10)
         os.startfile(last_version) # On lance la nouvelle version afin que le processus de suppression sois executer.     
         print('start', last_version)
         exit
@@ -79,10 +80,6 @@ def tool_update():
     else:
         print('Aucune update disponible !')
     time.sleep(1)
-    
-
-
-
 
 tool_update()
 
