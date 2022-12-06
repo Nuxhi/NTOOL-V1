@@ -15,12 +15,74 @@ from requests_html import HTMLSession
 ##
 ## N404 : le dossier n'est pas trouver
 
+
+
+# ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ #
+
+expired_version = 'NTool-V01.py'
 version = 'NTool-V01'
+last_version = 'NTool-V02.py'
+
+path = os.getcwd()
 os.system('mode con: cols=80 lines=20')
+# ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ #
+
+
+def tool_update():
+    
+    os.chdir(path)
+    os.startfile(last_version)
+    time.sleep(5)
+    print('Please wait, checking for updates. 1/2')
+    ## delete last version
+    os.chdir(path)
+    print(path)
+    try:
+        os.remove(expired_version)
+    except:
+        print('none')
+
+    # get last version // instalation 
+    print('Please wait, checking for updates. 2/2')
+
+    s = HTMLSession()
+    link = "https://github.com/Nuxhi"
+    link_update = "https://github.com/Nuxhi/NTool/blob/main/README.md"
+    rqt = s.get(link)
+    
+    if rqt.ok:
+        print('Connection to the update server')
+    else:
+        print('[Console] : Serveur indisponible : ', rqt,'\nDirigez-vous sur notre discord !')
+        time.sleep(2), main_menu()
+
+    try:
+        title = rqt.html.find('.p-org')[0].text
+    except:
+        title = ('UKN')
+    
+    if title != version:
+        print('update disponible !\nVersion : ',title,'disponible,\nTéléchargement en cours...')
+        r_upt = s.get(link_update, allow_redirects=True)
+        open('README.md', 'wb').write(r_upt.content)
+        
+        time.sleep(5)
+        os.startfile(last_version)
+        print('start', last_version)
+    else:
+        print('Aucune update disponible !')
+    time.sleep(1)
+    
+
+
+
+
+tool_update()
+
 def main_menu():
 
     os.system('cls')
-    print("\n                                 Bienvenu")
+    print("\n                          Bienvenu sur :", version)
     print("\n                       ╔══════════════════════════════╗")
     print("                       ║                              ║")
     print("                       ║     1.  Vider le cache       ║")
@@ -32,7 +94,6 @@ def main_menu():
     print("                       ║     4. Mise a jour du tool   ║")
     print("                       ║                              ║")
     print("                       ╚══════════════════════════════╝\n")
-
     choix = input(" [CONSOLE]   :  ")
     if choix == '1':
         cache_menu()
@@ -193,7 +254,7 @@ def cache_lvl2():
             pass
             print("[FILE] - * SubProcess_game not find ")
     
-
+    #C:\Users\FABIE\AppData\Local\FiveM\FiveM.app\bin\cef
 
     # 29 / 11 / 2020 -- 23:55
     #citizen-resources-client
@@ -248,36 +309,6 @@ def citizen_zero():
     else:
         print("[FOLDER] - citizen was not find")
 
-
-def tool_update():
-
-    s = HTMLSession()
-    link = "https://github.com/Nuxhi"
-    link_update = "https://github.com/Nuxhi/NTool/blob/main/README.md"
-
-    r = s.get(link)
-    
-    if r.ok:
-        print()
-    else:
-        print('[Console] : Serveur indisponible : ', r,'\nDirigez-vous sur notre discord !')
-        time.sleep(2), main_menu()
-
-    try:
-        title = r.html.find('.p-org')[0].text
-    except:
-        title = ('UKN')
-    
-    if title != version:
-        print('update disponible !\nVersion : ',title,'disponible')
-
-        r_upt = s.get(link_update, allow_redirects=True)
-        open('README.md', 'wb').write(r_upt.content)
-        
-        time.sleep(1)
-    else:
-        print('Aucune update disponible !')
-    time.sleep(1)
 
 
 main_menu()
