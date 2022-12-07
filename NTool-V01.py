@@ -20,8 +20,8 @@ from requests_html import HTMLSession
 # ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ #
 
 expired_version = 'NTool-V01.exe'
-version = 'NTool-V01'
-last_version = 'NTool-V02.exe'
+version = 'NTool-V02'
+last_version = 'NTool-V03.exe'
 
 path = os.getcwd()
 os.system('mode con: cols=80 lines=20')
@@ -40,7 +40,7 @@ def tool_update():
     try:
         os.remove(expired_version)
     except:
-        print('none')
+        print('')
 
     # get last version // instalation 
     print('Please wait, checking for updates. 2/2')
@@ -51,7 +51,6 @@ def tool_update():
     #https://github.com/Nuxhi/NTool/blob/main/README.md 
     rqt = s.get(link)
     
-
     #Vérification de la disponibilité des serveurs.
     if rqt.ok:
         print('Connection to the update server')
@@ -85,7 +84,11 @@ tool_update()
 
 def main_menu():
 
+    
+
+
     os.system('cls')
+    print(f"\n Cache : UKN")
     print("\n                          Bienvenu sur :", version)
     print("\n                       ╔══════════════════════════════╗")
     print("                       ║                              ║")
@@ -168,18 +171,140 @@ def cache_lvl1():
         pass
         print("[FILE] - caches.xml was not find")
 
-    
-    shutil.rmtree("data", ignore_errors=True)
-    if os.path.exists("data"):
-        print("[FOLDER] - DATA ")
-    else:
-        print("[FOLDER] - DATA was not find")
 
     shutil.rmtree("logs", ignore_errors=True)
     if os.path.exists("logs"):
         print("[FOLDER] - LOGS ")
     else:
         print("[FOLDER] - LOGS was not find")
+    
+
+    shutil.rmtree("crashes", ignore_errors=True)
+    if os.path.exists("crashes"):
+        print("[FOLDER] - crashes ")
+    else:
+        print("[FOLDER] - crashes was not find")
+
+
+    #CD dossier principal des données de FiveM
+    try:
+        os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app/data")
+    except:
+        print("[Erreur N404] - FiveM.app/DATA was not find")
+        time.sleep(2), main_menu() 
+
+    shutil.rmtree("server-cache", ignore_errors=True)
+    if os.path.exists("server-cache"):
+        print("[FOLDER] - server-cache ")
+    else:
+        print("[FOLDER] - server-cache was not find")
+
+
+    #CD Dossier stockage principal de FiveM
+    try:
+        os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app/data/game-storage")
+    except:
+        print("[Erreur N404] - DATA/game-storage was not find")
+        time.sleep(2), main_menu() 
+
+        
+    for e in glob.glob("update+update*.*"): # UPDATE // CASINO // NOEL ect
+        print(e)
+        try:
+            os.remove(e)
+            print("[FILE] -" + e)
+        except OSError:
+            pass
+            print("[FILE] - * update+update not find ")
+
+
+
+
+
+    #CD Dossier du cache principal de FiveM, procéssus / snapshot (data instable)
+    try:
+        os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app/data/cache")
+    except:
+        print("[Erreur N404] - DATA/CACHE was not find")
+        time.sleep(2), main_menu() 
+        
+
+    shutil.rmtree("subprocess", ignore_errors=True)
+    if os.path.exists("subprocess"):
+        print("[FOLDER] - subprocess ")
+    else:
+        print("[FOLDER] - subprocess was not find")
+
+
+    for e in glob.glob("executable_snapshot_*.*"):
+        print(e)
+        try:
+            os.remove(e)
+            print("[FILE] -" + e)
+        except OSError:
+            pass
+            print("[FILE] - * executable_snapshot not find ")
+
+
+
+  #CD Nui-Storage-Fxdk plusieur dossier cache
+    try:
+        os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app/data/nui-storage-fxdk")
+    except:
+        print("[Erreur N404] - data/nui-storage-fxdk was not find")
+        time.sleep(2), main_menu() 
+
+
+    shutil.rmtree("Cache", ignore_errors=True)
+    if os.path.exists("Cache"):
+        print("[FOLDER] - Cache ")
+    else:
+        print("[FOLDER] - Cache was not find")
+
+    shutil.rmtree("Code Cache", ignore_errors=True)
+    if os.path.exists("Code Cache"):
+        print("[FOLDER] - Code Cache ")
+    else:
+        print("[FOLDER] - Code Cache was not find")
+
+
+    shutil.rmtree("GPUCache", ignore_errors=True)
+    if os.path.exists("GPUCache"):
+        print("[FOLDER] - GPUCache ")
+    else:
+        print("[FOLDER] - GPUCache was not find")
+
+  #CD Nui-Storage-Fxdk-guest plusieur dossier cache
+    try:
+        os.chdir("C:/Users/" + username+ "/AppData/Local/FiveM/FiveM.app/data/nui-storage-fxdk-guest")
+    except:
+        print("[Erreur N404] - data/nui-storage-fxdk was not find")
+        time.sleep(2), main_menu() 
+
+
+    shutil.rmtree("Cache", ignore_errors=True)
+    if os.path.exists("Cache"):
+        print("[FOLDER] - Cache ")
+    else:
+        print("[FOLDER] - Cache was not find")
+
+    shutil.rmtree("Code Cache", ignore_errors=True)
+    if os.path.exists("Code Cache"):
+        print("[FOLDER] - Code Cache ")
+    else:
+        print("[FOLDER] - Code Cache was not find")
+
+
+    shutil.rmtree("GPUCache", ignore_errors=True)
+    if os.path.exists("GPUCache"):
+        print("[FOLDER] - GPUCache ")
+    else:
+        print("[FOLDER] - GPUCache was not find")
+
+
+
+
+
 
 def cache_lvl2():
 # cache_lvl2 : 
