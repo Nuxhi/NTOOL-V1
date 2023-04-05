@@ -5,7 +5,7 @@
 
 [🪐] **Useful information:**
 > - NTool V1 remains a file in development
-> - NTool was originally made for me, not for you.
+> - NTool was originally made for me, not for you. I needed them so I made them.
 > - NTool was for me one of the biggest projects I could do, so I had to do it
 
 
